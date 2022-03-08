@@ -1,7 +1,7 @@
 package org.launchcode.techjobs.persistent.models;
 
-import java.util.Objects;
 
+import java.util.Objects;
 
 public abstract class AbstractEntity {
 
