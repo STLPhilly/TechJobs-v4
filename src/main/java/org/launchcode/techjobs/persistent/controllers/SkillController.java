@@ -12,11 +12,17 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("Skill")
+@RequestMapping("skills")
 public class SkillController {
 
     @Autowired
     private SkillRepository skillRepository;
+
+    @RequestMapping("")
+    public String index(Model model){
+        model.addAttribute("skills", skillRepository.findAll());
+        return "skills/index";
+    }
 
     @GetMapping("add")
     public String displayAddSkillForm(Model model) {
@@ -31,15 +37,14 @@ public class SkillController {
         if (errors.hasErrors()) {
             return "skills/add";
         }
-
+            skillRepository.save(newSkill);
         return "redirect:";
     }
 
     @GetMapping("view/{skillId}")
     public String displayViewSkill(Model model, @PathVariable int skillId) {
 
-        // TODO 5
-        Optional optSkill = null;
+        Optional optSkill = skillRepository.findById(skillId);
         if (optSkill.isPresent()) {
             Skill skill = (Skill) optSkill.get();
             model.addAttribute("skill", skill);

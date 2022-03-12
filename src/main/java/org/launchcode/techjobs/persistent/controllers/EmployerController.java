@@ -15,11 +15,14 @@ import java.util.Optional;
 @RequestMapping("employers")
 public class EmployerController {
 
-    // TODO 2 Add an index method that responds at /employers with a list of all employers in the
-    //  database.
       @Autowired
       private EmployerRepository employerRepository;
 
+      @RequestMapping("")
+      public String index(Model model){
+          model.addAttribute("employers", employerRepository.findAll());
+          return "employers/index";
+      }
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
@@ -27,8 +30,6 @@ public class EmployerController {
         return "employers/add";
     }
 
-    // TODO 3 processAddEmployerForm does not yet contain the code to save a valid object. Use
-    //  employerRepository and the appropriate method to do so.
     @PostMapping("add")
     public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
                                     Errors errors, Model model) {
@@ -36,15 +37,14 @@ public class EmployerController {
         if (errors.hasErrors()) {
             return "employers/add";
         }
-
+            employerRepository.save(newEmployer);
         return "redirect:";
     }
 
     @GetMapping("view/{employerId}")
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
 
-        // TODO 4
-        Optional optEmployer = null;
+        Optional optEmployer = employerRepository.findById(employerId);
         if (optEmployer.isPresent()) {
             Employer employer = (Employer) optEmployer.get();
             model.addAttribute("employer", employer);
