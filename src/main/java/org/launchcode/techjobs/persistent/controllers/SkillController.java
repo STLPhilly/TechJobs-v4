@@ -1,6 +1,8 @@
 package org.launchcode.techjobs.persistent.controllers;
 
 import org.launchcode.techjobs.persistent.models.Skill;
+import org.launchcode.techjobs.persistent.models.data.SkillRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,6 +15,8 @@ import java.util.Optional;
 @RequestMapping("Skill")
 public class SkillController {
 
+    @Autowired
+    private SkillRepository skillRepository;
 
     @GetMapping("add")
     public String displayAddSkillForm(Model model) {
@@ -34,7 +38,7 @@ public class SkillController {
     @GetMapping("view/{skillId}")
     public String displayViewSkill(Model model, @PathVariable int skillId) {
 
-        // TODO 3
+        // TODO 5
         Optional optSkill = null;
         if (optSkill.isPresent()) {
             Skill skill = (Skill) optSkill.get();

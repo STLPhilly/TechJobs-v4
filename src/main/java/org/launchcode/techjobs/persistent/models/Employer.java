@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 @Entity
 public class Employer extends AbstractEntity {
 
-    //TODO add validation?
+    //TODO 1 add validation?
     public String location;
 
     public Employer () {

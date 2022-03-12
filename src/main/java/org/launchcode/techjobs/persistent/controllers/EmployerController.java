@@ -1,6 +1,7 @@
 package org.launchcode.techjobs.persistent.controllers;
 
 import org.launchcode.techjobs.persistent.models.Employer;
+import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +15,10 @@ import java.util.Optional;
 @RequestMapping("employers")
 public class EmployerController {
 
-    // TODO Add a private field of EmployerRepository type called employerRepository to EmployerController
-    // TODO Add an index method that responds at /employers with a list of all employers in the database.
-//    @Autowired
-//    private employerRepository
+    // TODO 2 Add an index method that responds at /employers with a list of all employers in the
+    //  database.
+      @Autowired
+      private EmployerRepository employerRepository;
 
 
     @GetMapping("add")
@@ -26,7 +27,7 @@ public class EmployerController {
         return "employers/add";
     }
 
-    // TODO  processAddEmployerForm does not yet contain the code to save a valid object. Use
+    // TODO 3 processAddEmployerForm does not yet contain the code to save a valid object. Use
     //  employerRepository and the appropriate method to do so.
     @PostMapping("add")
     public String processAddEmployerForm(@ModelAttribute @Valid Employer newEmployer,
@@ -42,7 +43,7 @@ public class EmployerController {
     @GetMapping("view/{employerId}")
     public String displayViewEmployer(Model model, @PathVariable int employerId) {
 
-        // TODO 3
+        // TODO 4
         Optional optEmployer = null;
         if (optEmployer.isPresent()) {
             Employer employer = (Employer) optEmployer.get();
