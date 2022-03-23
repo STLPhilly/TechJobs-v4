@@ -13,7 +13,7 @@ public class Skill extends AbstractEntity {
     public String description;
 
     @ManyToMany(mappedBy = "skills")
-    private final List<Job> jobs = new ArrayList<>();
+    public List<Job> jobs = new ArrayList<>();
 
 
     public Skill () {
